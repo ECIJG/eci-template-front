@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    image: talos-client:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:3000"
+    environment:
+      - TZ=America/Bogota

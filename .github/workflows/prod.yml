@@ -1,0 +1,13 @@
+name: talos-client
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, front]
+
+    steps:
+      - name: Deploy
+        run: /root/apps/deploy.sh talos-client
