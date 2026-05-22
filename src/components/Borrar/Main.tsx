@@ -1,9 +1,11 @@
+import SwitchTheme from "../ui/SwitchTheme";
 
 const Main = () => {
-  return (
-    <>
-    </>
-  );
+	return (
+		<>
+			<SwitchTheme />
+		</>
+	);
 };
 
 export default Main;
