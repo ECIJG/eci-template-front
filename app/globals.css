@@ -2,152 +2,279 @@
 @import "@heroui/styles";
 
 ::selection {
-	background-color: #990000;
-	color: #ffffff;
+  background-color: "#990000";
+  color: "#ffffff";
 }
 
 :root {
-	--radius: 0.35rem;
+  --radius: 0.25rem;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 
 :root,
 [data-theme="light"] {
-	/* Override default colors */
-	--accent: #990000;
-	--accent-foreground: #ffffff;
+  /* Brand */
+  --accent: #990000;
+  --accent-foreground: #ffffff;
 
-	--transparent: #00000000;
-	--blurred-white: #ffffffc7;
-	--default-white: #ffff;
-	--soft-white: #f9f9f9;
-	--off-white: #f3f3f3;
-	--custom-black: #1b1b1b;
-	--soft-gray: #c5c5c5;
-	--gray: #898989;
-	--dark-gray: #2b2b2b;
-	--soft-green: #75f0a0;
-	--green: #1ccc5b;
-	--dark-green: #117a37;
-	--soft-blue: #729cff;
-	--blue: #2d6bff;
-	--dark-blue: #1f4ab2;
-	--yellow: #f1c40f;
-	--soft-red: #ff8a8a;
-	--red: #e72828;
-	--dark-red: #8b1111;
-	--soft-purple: #540000;
-	--purple: #612d8a;
-	--dark-purple: #381850;
-	--civil: #a71930;
-	--electrica: #490e6f;
-	--sistemas: #008542;
-	--industrial: #e37222;
-	--electronica: #0039a6;
-	--economia: #0083a9;
-	--empresas: #a1006b;
-	--matematicas: #003c69;
-	--mecanica: #f0ab00;
-	--biomedica: #5bbbb7;
-	--ambiental: #7bba25;
-	--estadistica: #00d900;
-	--doctorados: #003946;
-	--proyectos: #de3831;
-	--osiris: #0938a7;
+  /* Base */
+  --background: #ffffff;
+  --background-secondary: #f8f9fb;
+  --surface: #ffffff;
+  --surface-hover: #f3f4f6;
+
+  /* Text */
+  --foreground: #111827;
+  --foreground-muted: #6b7280;
+  --foreground-soft: #9ca3af;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --border-soft: #f1f5f9;
+
+  /* Utility */
+  --transparent: #00000000;
+  --blurred-white: rgba(255, 255, 255, 0.75);
+
+  /* Generic palette */
+  --default-white: #ffffff;
+  --soft-white: #f9fafb;
+  --off-white: #f3f4f6;
+
+  --custom-black: #111827;
+  --soft-gray: #d1d5db;
+  --gray: #6b7280;
+  --dark-gray: #374151;
+
+  /* Status */
+  --soft-green: #86efac;
+  --green: #22c55e;
+  --dark-green: #15803d;
+
+  --soft-blue: #93c5fd;
+  --blue: #3b82f6;
+  --dark-blue: #1d4ed8;
+
+  --yellow: #eab308;
+
+  --soft-red: #fca5a5;
+  --red: #ef4444;
+  --dark-red: #b91c1c;
+
+  --soft-purple: #c4b5fd;
+  --purple: #8b5cf6;
+  --dark-purple: #6d28d9;
+
+  /* Facultades */
+  --civil: #a71930;
+  --electrica: #490e6f;
+  --sistemas: #008542;
+  --industrial: #e37222;
+  --electronica: #0039a6;
+  --economia: #0083a9;
+  --empresas: #a1006b;
+  --matematicas: #003c69;
+  --mecanica: #f0ab00;
+  --biomedica: #5bbbb7;
+  --ambiental: #7bba25;
+  --estadistica: #00d900;
+  --doctorados: #003946;
+  --proyectos: #de3831;
+  --osiris: #0938a7;
 }
 
 .dark,
 [data-theme="dark"] {
-	/* Override dark theme colors */
-	--accent: #b30000;
-	--accent-foreground: #ffffff;
+  /* Brand */
+  --accent: #990000;
+  --accent-foreground: #ffffff;
 
-	--transparent: #00000000;
-	--blurred-white: #ffffffc7;
-	--default-white: #ffff;
-	--soft-white: #f9f9f9;
-	--off-white: #f3f3f3;
-	--custom-black: #1b1b1b;
-	--soft-gray: #c5c5c5;
-	--gray: #898989;
-	--dark-gray: #2b2b2b;
-	--soft-green: #75f0a0;
-	--green: #1ccc5b;
-	--dark-green: #117a37;
-	--soft-blue: #729cff;
-	--blue: #2d6bff;
-	--dark-blue: #1f4ab2;
-	--yellow: #f1c40f;
-	--soft-red: #ff8a8a;
-	--red: #e72828;
-	--dark-red: #8b1111;
-	--soft-purple: #540000;
-	--purple: #612d8a;
-	--dark-purple: #381850;
-	--civil: #a71930;
-	--electrica: #490e6f;
-	--sistemas: #008542;
-	--industrial: #e37222;
-	--electronica: #0039a6;
-	--economia: #0083a9;
-	--empresas: #a1006b;
-	--matematicas: #003c69;
-	--mecanica: #f0ab00;
-	--biomedica: #5bbbb7;
-	--ambiental: #7bba25;
-	--estadistica: #00d900;
-	--doctorados: #003946;
-	--proyectos: #de3831;
-	--osiris: #0938a7;
+  /* Base */
+  --background: #09090b;
+  --background-secondary: #111113;
+
+  /* Surfaces */
+  --surface: #18181b;
+  --surface-hover: #232326;
+
+  /* Text */
+  --foreground: #fafafa;
+  --foreground-muted: #a1a1aa;
+  --foreground-soft: #71717a;
+
+  /* Borders */
+  --border: #27272a;
+  --border-soft: #1f1f23;
+
+  /* Utility */
+  --transparent: #00000000;
+  --blurred-white: rgba(24, 24, 27, 0.7);
+
+  /* Generic palette */
+  --default-white: #fafafa;
+  --soft-white: #d4d4d8;
+  --off-white: #a1a1aa;
+
+  --custom-black: #09090b;
+  --soft-gray: #52525b;
+  --gray: #a1a1aa;
+  --dark-gray: #e4e4e7;
+
+  /* Status */
+  --soft-green: #14532d;
+  --green: #22c55e;
+  --dark-green: #86efac;
+
+  --soft-blue: #172554;
+  --blue: #3b82f6;
+  --dark-blue: #93c5fd;
+
+  --yellow: #facc15;
+
+  --soft-red: #7f1d1d;
+  --red: #ef4444;
+  --dark-red: #fca5a5;
+
+  --soft-purple: #312e81;
+  --purple: #8b5cf6;
+  --dark-purple: #c4b5fd;
+
+  /* Facultades */
+  --civil: #a71930;
+  --electrica: #490e6f;
+  --sistemas: #008542;
+  --industrial: #e37222;
+  --electronica: #0039a6;
+  --economia: #0083a9;
+  --empresas: #a1006b;
+  --matematicas: #003c69;
+  --mecanica: #f0ab00;
+  --biomedica: #5bbbb7;
+  --ambiental: #7bba25;
+  --estadistica: #00d900;
+  --doctorados: #003946;
+  --proyectos: #de3831;
+  --osiris: #0938a7;
 }
 
 @theme inline {
-	--color-primary: var(--accent);
-	--color-primary-foreground: var(--accent-foreground);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
 
-	--color-transparent: var(--transparent);
-	--color-blurred-white: var(--blurred-white);
-	--color-default-white: var(--default-white);
-	--color-soft-white: var(--soft-white);
-	--color-off-white: var(--off-white);
-	--color-custom-black: var(--custom-black);
-	--color-soft-gray: var(--soft-gray);
-	--color-gray: var(--gray);
-	--color-dark-gray: var(--dark-gray);
-	--color-soft-green: var(--soft-green);
-	--color-green: var(--green);
-	--color-dark-green: var(--dark-green);
-	--color-soft-blue: var(--soft-blue);
-	--color-blue: var(--blue);
-	--color-dark-blue: var(--dark-blue);
-	--color-yellow: var(--yellow);
-	--color-soft-red: var(--soft-red);
-	--color-red: var(--red);
-	--color-dark-red: var(--dark-red);
-	--color-soft-purple: var(--soft-purple);
-	--color-purple: var(--purple);
-	--color-dark-purple: var(--dark-purple);
-	--color-civil: var(--civil);
-	--color-electrica: var(--electrica);
-	--color-sistemas: var(--sistemas);
-	--color-industrial: var(--industrial);
-	--color-electronica: var(--electronica);
-	--color-economia: var(--economia);
-	--color-empresas: var(--empresas);
-	--color-matematicas: var(--matematicas);
-	--color-mecanica: var(--mecanica);
-	--color-biomedica: var(--biomedica);
-	--color-ambiental: var(--ambiental);
-	--color-estadistica: var(--estadistica);
-	--color-doctorados: var(--doctorados);
-	--color-proyectos: var(--proyectos);
-	--color-osiris: var(--osiris);
+  --color-transparent: var(--transparent);
+  --color-blurred-white: var(--blurred-white);
+  --color-default-white: var(--default-white);
+  --color-soft-white: var(--soft-white);
+  --color-off-white: var(--off-white);
+  --color-custom-black: var(--custom-black);
+  --color-soft-gray: var(--soft-gray);
+  --color-gray: var(--gray);
+  --color-dark-gray: var(--dark-gray);
+  --color-soft-green: var(--soft-green);
+  --color-green: var(--green);
+  --color-dark-green: var(--dark-green);
+  --color-soft-blue: var(--soft-blue);
+  --color-blue: var(--blue);
+  --color-dark-blue: var(--dark-blue);
+  --color-yellow: var(--yellow);
+  --color-soft-red: var(--soft-red);
+  --color-red: var(--red);
+  --color-dark-red: var(--dark-red);
+  --color-soft-purple: var(--soft-purple);
+  --color-purple: var(--purple);
+  --color-dark-purple: var(--dark-purple);
+  --color-civil: var(--civil);
+  --color-electrica: var(--electrica);
+  --color-sistemas: var(--sistemas);
+  --color-industrial: var(--industrial);
+  --color-electronica: var(--electronica);
+  --color-economia: var(--economia);
+  --color-empresas: var(--empresas);
+  --color-matematicas: var(--matematicas);
+  --color-mecanica: var(--mecanica);
+  --color-biomedica: var(--biomedica);
+  --color-ambiental: var(--ambiental);
+  --color-estadistica: var(--estadistica);
+  --color-doctorados: var(--doctorados);
+  --color-proyectos: var(--proyectos);
+  --color-osiris: var(--osiris);
 }
 
 @keyframes iconFlip {
-	from {
-		transform: rotate(180deg);
-	}
-	to {
-		transform: rotate(0deg);
-	}
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes enterAnimate {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes shakeAnimateButton {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@utility animate-slide-right {
+  animation: slide-in-right 0.3s ease-out forwards;
+}
+
+@utility animate-slide-left {
+  animation: slide-in-left 0.3s ease-out forwards;
 }

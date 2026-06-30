@@ -31,6 +31,9 @@ interface Props {
 	children?: React.ReactNode;
 }
 
+// Si se quiere manejar el estado desde el padre, se debe usar const modalRef = useRef<ModalRef>(null);
+// y luego llamar a modalRef.current?.open() o modalRef.current?.close() y poner como prop del compontente ref={modalRef}
+
 const Modal = forwardRef<ModalRef, Props>(
 	(
 		{
@@ -49,12 +52,6 @@ const Modal = forwardRef<ModalRef, Props>(
 		ref,
 	) => {
 		const [isOpen, setIsOpen] = useState(false);
-
-		useImperativeHandle(ref, () => ({
-			open: () => setIsOpen(true),
-			close: () => setIsOpen(false),
-			toggle: () => setIsOpen((prev) => !prev),
-		}));
 
 		const animations = [
 			{
@@ -124,7 +121,6 @@ const Modal = forwardRef<ModalRef, Props>(
 		return (
 			<>
 				<HerouiModal isOpen={isOpen} onOpenChange={setIsOpen}>
-					<Button>Open Modal</Button>
 					<HerouiModal.Backdrop
 						variant={backdropVariant}
 						isDismissable={!closeDisabled}
