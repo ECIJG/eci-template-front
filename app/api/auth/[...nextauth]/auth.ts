@@ -26,7 +26,7 @@ export const authOptions: AuthOptions = {
 				password: { label: "Password", type: "text" },
 				rol: { label: "rol", type: "text" },
 			},
-			async authorize(credentials) {
+			async authorize(credentials, account) {
 				const response = await fetchFn(`/endpoint/login`, {
 					method: "POST",
 					body: {
@@ -44,7 +44,7 @@ export const authOptions: AuthOptions = {
 				} else if (response.code !== 200) {
 					throw new Error("server");
 				}
-				return { ...response.data, email: response.data.correo_principal };
+				return { ...response.data, email: response.data.correo_principal, account };
 			},
 		}),
 	],
@@ -55,14 +55,15 @@ export const authOptions: AuthOptions = {
 	},
 
 	callbacks: {
-		async jwt({ token, user, trigger, session }) {
+		async jwt({ token, user, account, trigger, session }) {
 			if (trigger === "update") {
-				return { ...token, ...session.user };
+				return { ...token, ...session.user, ...account };
 			}
-			return { ...token, ...user };
+			return { ...token, ...user, ...account };
 		},
 		async session({ session, token }) {
 			session.user = token as any;
+			session.accessToken = token.accessToken as string;
 			return session;
 		},
 	},

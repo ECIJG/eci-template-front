@@ -1,7 +1,8 @@
 "use client";
 
 import useMounted from "@/src/hooks/UseMounted";
-import { Switch } from "@heroui/react";
+import { cn } from "@/src/libs/utils";
+import { Button, Tooltip } from "@heroui/react";
 import { useTheme } from "next-themes";
 import Icon from "./Icon";
 
@@ -12,24 +13,28 @@ const SwitchTheme = () => {
 	if (!mounted) return null;
 
 	return (
-		<>
-			<Switch
-				size="lg"
-				className="rounded-full"
-				isSelected={theme === "dark"}
-				onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+		<Tooltip>
+			<Button
+				isIconOnly
+				className={cn("absolute bottom-3 right-3")}
+				variant={theme === "light" ? "primary" : "secondary"}
+				onPress={() => setTheme(theme === "light" ? "dark" : "light")}
 			>
-				<Switch.Control className="h-[30px] w-[51px]">
-					<Switch.Thumb className="h-[27px] mb-[0.5px]">
-						<Switch.Icon>
-							<span key={theme} className="animate-[iconFlip_200ms_ease-out_1]">
-								<Icon icon={theme === "light" ? "sun-fill" : "moon-fill"} />
-							</span>
-						</Switch.Icon>
-					</Switch.Thumb>
-				</Switch.Control>
-			</Switch>
-		</>
+				<span
+					key={theme}
+					className="animate-[iconFlip_200ms_ease-out_1] mb-[-2px]"
+				>
+					<Icon
+						className="text-lg"
+						icon={theme === "light" ? "sun-fill" : "moon-fill"}
+					/>
+				</span>
+			</Button>
+			<Tooltip.Content>
+				<Tooltip.Arrow />
+				<p>Cambiar a modo {theme === "light" ? "oscuro" : "claro"}</p>
+			</Tooltip.Content>
+		</Tooltip>
 	);
 };
 
