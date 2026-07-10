@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    image: talos-client:latest
+    image: ${CONTAINER_NAME}:latest
     restart: unless-stopped
     env_file:
       - .env

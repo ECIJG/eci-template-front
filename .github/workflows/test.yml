@@ -1,4 +1,4 @@
-name: talos-client
+name: ${CONTAINER_NAME}
 
 on:
   push:
@@ -10,4 +10,4 @@ jobs:
 
     steps:
       - name: Deploy
-        run: /root/apps/deploy.sh talos-client
+        run: /root/apps/deploy.sh ${CONTAINER_NAME}
