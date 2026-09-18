@@ -1,10 +1,9 @@
-
 # TODO: forma de que se pueda cambiar esto
 name: ${CONTAINER_NAME}
 
 on:
   push:
-    branches: [ "test" ]
+    branches: ["test"]
 
 jobs:
   deploy:
@@ -12,5 +11,5 @@ jobs:
 
     steps:
       - name: Deploy
-# TODO: forma de que se pueda cambiar esto
+        # TODO: forma de que se pueda cambiar esto
         run: /root/apps/deploy.sh ${CONTAINER_NAME}
