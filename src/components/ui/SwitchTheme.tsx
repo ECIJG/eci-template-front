@@ -16,7 +16,7 @@ const SwitchTheme = () => {
 		<Tooltip>
 			<Button
 				isIconOnly
-				className={cn("absolute bottom-3 right-3")}
+				className={cn("fixed bottom-3 right-3")}
 				variant={theme === "light" ? "primary" : "secondary"}
 				onPress={() => setTheme(theme === "light" ? "dark" : "light")}
 			>
