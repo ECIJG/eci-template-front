@@ -39,9 +39,10 @@ const ImageLogo = ({
                 className={`block select-none ${(target || reload) && "cursor-pointer"}`}
                 style={{ height, width: 'auto' }}
                 onError={(e) => {
-                    // Fallback to default image if primary fails
-                    const fallbackPath = `/images/ecijg126${theme === "dark" ? "-light" : ""}.png`;
-                    (e.target as HTMLImageElement).src = fallbackPath;
+                    // Si la versión -light no existe, cae a la versión estándar del mismo tamaño
+                    const imgEl = e.target as HTMLImageElement;
+                    imgEl.onerror = null; // evita loop infinito
+                    imgEl.src = `/images/ecijg${height}.png`;
                 }}
                 onClick={() => {
                     if (reload) window.location.reload();

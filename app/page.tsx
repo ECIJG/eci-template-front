@@ -7,10 +7,13 @@ export default function Home() {
 		<>
 			{/*
 		TODO
-		- Se debe buscar en el proyecto y cambiar todo los CONTAINER_NAME para los despliegues
-		- Buscar los TODO: en el proyecto y revisar si hay algun paso más
+		- Buscar CONTAINER_NAME en el proyecto y reemplazarlo para los despliegues
+		- Buscar todos los TODO: y revisar si hay algún paso adicional
 		- Eliminar todo de la carpeta Eliminar en src
-		- Si se instalo Next auth valida que las rutas de api y  middleware esten bien (si existe /login y /logout, ya esta configurado, si no hay que cambiarlos)
+		- NextAuth ya está configurado como infraestructura. Para proteger rutas:
+		    1. Descomenta el bloque `pages` en app/api/auth/[...nextauth]/auth.ts
+		    2. Crea app/login/page.tsx y app/logout/page.tsx
+		    3. Activa la protección de rutas en middleware.ts
 		*/}
 			<Main />
 		</>

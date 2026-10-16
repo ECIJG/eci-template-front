@@ -2,279 +2,484 @@
 @import "@heroui/styles";
 
 ::selection {
-  background-color: "#990000";
-  color: "#ffffff";
+	background-color: var(--primary);
+	color: #ffffff;
 }
 
 :root {
-  --radius: 0.25rem;
+	--radius: 0.5rem;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
 }
-
 
 :root,
 [data-theme="light"] {
-  /* Brand */
-  --accent: #990000;
-  --accent-foreground: #ffffff;
+	/* Brand Primary (Escuela Colombiana de Ingeniería Julio Garavito) */
+	--accent: #990000;
+	--accent-rgb: 153, 0, 0;
+	--accent-hover: #7e0000;
+	--accent-hover-rgb: 126, 0, 0;
+	--accent-foreground: #ffffff;
+	--accent-soft: rgba(153, 0, 0, 0.08);
+	--accent-soft-hover: rgba(153, 0, 0, 0.14);
 
-  /* Base */
-  --background: #ffffff;
-  --background-secondary: #f8f9fb;
-  --surface: #ffffff;
-  --surface-hover: #f3f4f6;
+	/* Variantes escala tonal Accent (Light) */
+	--accent-50: #fef2f2;
+	--accent-100: #fee2e2;
+	--accent-200: #fecaca;
+	--accent-300: #fca5a5;
+	--accent-400: #f87171;
+	--accent-500: #990000;
+	--accent-600: #880000;
+	--accent-700: #7e0000;
+	--accent-800: #660000;
+	--accent-900: #450a0a;
+	--accent-950: #2d0404;
 
-  /* Text */
-  --foreground: #111827;
-  --foreground-muted: #6b7280;
-  --foreground-soft: #9ca3af;
+	--primary: #990000;
+	--primary-rgb: 153, 0, 0;
+	--primary-hover: #7e0000;
+	--primary-hover-rgb: 126, 0, 0;
+	--primary-active: #660000;
+	--primary-foreground: #ffffff;
+	--primary-soft: rgba(153, 0, 0, 0.07);
+	--primary-soft-foreground: #990000;
+	--primary-border: rgba(153, 0, 0, 0.22);
+	--primary-glow: rgba(153, 0, 0, 0.05);
 
-  /* Borders */
-  --border: #e5e7eb;
-  --border-soft: #f1f5f9;
+	--surface-rgb: 255, 255, 255;
+	--border-rgb: 228, 228, 231;
 
-  /* Utility */
-  --transparent: #00000000;
-  --blurred-white: rgba(255, 255, 255, 0.75);
+	/* Canvas / Base background (Blanco a gris neutro puro - sin tintes azules) */
+	--background: #fafafa;
+	--background-secondary: #f4f4f5;
+	--background-tertiary: #e4e4e7;
 
-  /* Generic palette */
-  --default-white: #ffffff;
-  --soft-white: #f9fafb;
-  --off-white: #f3f4f6;
+	/* Surfaces & Containers */
+	--surface: #ffffff;
+	--surface-hover: #f4f4f5;
+	--surface-secondary: #f4f4f5;
+	--surface-tertiary: #e4e4e7;
+	--surface-muted: #f4f4f5;
 
-  --custom-black: #111827;
-  --soft-gray: #d1d5db;
-  --gray: #6b7280;
-  --dark-gray: #374151;
+	/* Cards */
+	--card: #ffffff;
+	--card-foreground: #18181b;
+	--card-border: rgba(24, 24, 27, 0.07);
 
-  /* Status */
-  --soft-green: #86efac;
-  --green: #22c55e;
-  --dark-green: #15803d;
+	/* Overlays, Popovers & Modals */
+	--overlay: #ffffff;
+	--overlay-foreground: #18181b;
+	--overlay-border: #e4e4e7;
 
-  --soft-blue: #93c5fd;
-  --blue: #3b82f6;
-  --dark-blue: #1d4ed8;
+	/* Typography & Foreground */
+	--foreground: #18181b;
+	--foreground-muted: #71717a;
+	--foreground-soft: #a1a1aa;
 
-  --yellow: #eab308;
+	/* Form Fields */
+	--field-background: #ffffff;
+	--field-foreground: #18181b;
+	--field-placeholder: #a1a1aa;
+	--field-border: #d4d4d8;
 
-  --soft-red: #fca5a5;
-  --red: #ef4444;
-  --dark-red: #b91c1c;
+	/* Borders & Dividers */
+	--border: #e4e4e7;
+	--border-soft: #f4f4f5;
+	--border-subtle: rgba(24, 24, 27, 0.05);
+	--separator: #e4e4e7;
 
-  --soft-purple: #c4b5fd;
-  --purple: #8b5cf6;
-  --dark-purple: #6d28d9;
+	/* Utility & Patterns */
+	--transparent: #00000000;
+	--blurred-white: rgba(255, 255, 255, 0.85);
+	--pattern-stroke: rgba(24, 24, 27, 0.04);
+	--pattern-primary: rgba(153, 0, 0, 0.06);
 
-  /* Facultades */
-  --civil: #a71930;
-  --electrica: #490e6f;
-  --sistemas: #008542;
-  --industrial: #e37222;
-  --electronica: #0039a6;
-  --economia: #0083a9;
-  --empresas: #a1006b;
-  --matematicas: #003c69;
-  --mecanica: #f0ab00;
-  --biomedica: #5bbbb7;
-  --ambiental: #7bba25;
-  --estadistica: #00d900;
-  --doctorados: #003946;
-  --proyectos: #de3831;
-  --osiris: #0938a7;
+	/* Generic palette */
+	--default: #f4f4f5;
+	--default-foreground: #18181b;
+	--default-white: #ffffff;
+	--soft-white: #fafafa;
+	--off-white: #f4f4f5;
+
+	--custom-black: #18181b;
+	--soft-gray: #d4d4d8;
+	--gray: #71717a;
+	--dark-gray: #3f3f46;
+
+	/* Status Colors */
+	--soft-green: #dcfce7;
+	--green: #16a34a;
+	--dark-green: #15803d;
+
+	--soft-blue: #dbeafe;
+	--blue: #2563eb;
+	--dark-blue: #1d4ed8;
+
+	--soft-yellow: #fef9c3;
+	--yellow: #ca8a04;
+
+	--soft-red: #fee2e2;
+	--red: #dc2626;
+	--dark-red: #991b1b;
+
+	--soft-purple: #f3e8ff;
+	--purple: #9333ea;
+	--dark-purple: #7e22ce;
+
+	/* Facultades ECI */
+	--civil: #a71930;
+	--electrica: #490e6f;
+	--sistemas: #008542;
+	--industrial: #e37222;
+	--electronica: #0039a6;
+	--economia: #0083a9;
+	--empresas: #a1006b;
+	--matematicas: #003c69;
+	--mecanica: #f0ab00;
+	--biomedica: #5bbbb7;
+	--ambiental: #7bba25;
+	--estadistica: #00d900;
+	--doctorados: #003946;
+	--proyectos: #de3831;
+	--osiris: #0938a7;
 }
 
+/* ==========================================================================
+   PALETA DE COLORES - DARK THEME
+   ========================================================================== */
 .dark,
 [data-theme="dark"] {
-  /* Brand */
-  --accent: #990000;
-  --accent-foreground: #ffffff;
+	/* Brand Primary (Calibrado a carmesí rubí con óptimo contraste en dark mode) */
+	--accent: #e11d48;
+	--accent-rgb: 225, 29, 72;
+	--accent-hover: #f43f5e;
+	--accent-hover-rgb: 244, 63, 94;
+	--accent-foreground: #ffffff;
+	--accent-soft: rgba(225, 29, 72, 0.15);
+	--accent-soft-hover: rgba(225, 29, 72, 0.22);
 
-  /* Base */
-  --background: #09090b;
-  --background-secondary: #111113;
+	/* Variantes escala tonal Accent (Dark) */
+	--accent-50: #450a0a;
+	--accent-100: #5c0f16;
+	--accent-200: #881337;
+	--accent-300: #9f1239;
+	--accent-400: #be123c;
+	--accent-500: #e11d48;
+	--accent-600: #f43f5e;
+	--accent-700: #fb7185;
+	--accent-800: #fda4af;
+	--accent-900: #fecdd3;
+	--accent-950: #ffe4e6;
 
-  /* Surfaces */
-  --surface: #18181b;
-  --surface-hover: #232326;
+	--primary: #e11d48;
+	--primary-rgb: 225, 29, 72;
+	--primary-hover: #f43f5e;
+	--primary-hover-rgb: 244, 63, 94;
+	--primary-active: #be123c;
+	--primary-foreground: #ffffff;
+	--primary-soft: rgba(225, 29, 72, 0.15);
+	--primary-soft-foreground: #fda4af;
+	--primary-border: rgba(225, 29, 72, 0.35);
+	--primary-glow: rgba(225, 29, 72, 0.12);
 
-  /* Text */
-  --foreground: #fafafa;
-  --foreground-muted: #a1a1aa;
-  --foreground-soft: #71717a;
+	--surface-rgb: 24, 24, 27;
+	--border-rgb: 255, 255, 255;
 
-  /* Borders */
-  --border: #27272a;
-  --border-soft: #1f1f23;
+	/* Canvas / Base background (Carbón grafito oscuro - NO negro puro #000000, NO azul) */
+	--background: #121214;
+	--background-secondary: #161619;
+	--background-tertiary: #1a1a1e;
 
-  /* Utility */
-  --transparent: #00000000;
-  --blurred-white: rgba(24, 24, 27, 0.7);
+	/* Surfaces & Containers (En orden estricto de elevación: de grafito a gris) */
+	--surface: #18181b;
+	--surface-hover: #1f1f23;
+	--surface-secondary: #222226;
+	--surface-tertiary: #2a2a30;
+	--surface-muted: #202024;
 
-  /* Generic palette */
-  --default-white: #fafafa;
-  --soft-white: #d4d4d8;
-  --off-white: #a1a1aa;
+	/* Cards (Nivel 1 sobre el canvas: grafito neutro) */
+	--card: #18181b;
+	--card-foreground: #f4f4f5;
+	--card-border: rgba(255, 255, 255, 0.08);
 
-  --custom-black: #09090b;
-  --soft-gray: #52525b;
-  --gray: #a1a1aa;
-  --dark-gray: #e4e4e7;
+	/* Overlays, Popovers & Modals (Nivel 4 más elevado hacia el gris) */
+	--overlay: #36363d;
+	--overlay-foreground: #f4f4f5;
+	--overlay-border: rgba(255, 255, 255, 0.12);
 
-  /* Status */
-  --soft-green: #14532d;
-  --green: #22c55e;
-  --dark-green: #86efac;
+	/* Typography & Foreground */
+	--foreground: #f4f4f5;
+	--foreground-muted: #a1a1aa;
+	--foreground-soft: #71717a;
 
-  --soft-blue: #172554;
-  --blue: #3b82f6;
-  --dark-blue: #93c5fd;
+	/* Form Fields */
+	--field-background: #1c1c20;
+	--field-foreground: #f4f4f5;
+	--field-placeholder: #71717a;
+	--field-border: rgba(255, 255, 255, 0.12);
 
-  --yellow: #facc15;
+	/* Borders & Dividers */
+	--border: rgba(255, 255, 255, 0.08);
+	--border-soft: rgba(255, 255, 255, 0.05);
+	--border-subtle: rgba(255, 255, 255, 0.06);
+	--separator: rgba(255, 255, 255, 0.08);
 
-  --soft-red: #7f1d1d;
-  --red: #ef4444;
-  --dark-red: #fca5a5;
+	/* Utility & Patterns */
+	--transparent: #00000000;
+	--blurred-white: rgba(24, 24, 27, 0.85);
+	--pattern-stroke: rgba(255, 255, 255, 0.035);
+	--pattern-primary: rgba(225, 29, 72, 0.08);
 
-  --soft-purple: #312e81;
-  --purple: #8b5cf6;
-  --dark-purple: #c4b5fd;
+	/* Generic palette */
+	--default: #222226;
+	--default-foreground: #f4f4f5;
+	--default-white: #f4f4f5;
+	--soft-white: #d4d4d8;
+	--off-white: #a1a1aa;
 
-  /* Facultades */
-  --civil: #a71930;
-  --electrica: #490e6f;
-  --sistemas: #008542;
-  --industrial: #e37222;
-  --electronica: #0039a6;
-  --economia: #0083a9;
-  --empresas: #a1006b;
-  --matematicas: #003c69;
-  --mecanica: #f0ab00;
-  --biomedica: #5bbbb7;
-  --ambiental: #7bba25;
-  --estadistica: #00d900;
-  --doctorados: #003946;
-  --proyectos: #de3831;
-  --osiris: #0938a7;
+	--custom-black: #121214;
+	--soft-gray: #3f3f46;
+	--gray: #71717a;
+	--dark-gray: #a1a1aa;
+
+	/* Status Colors */
+	--soft-green: rgba(34, 197, 94, 0.16);
+	--green: #22c55e;
+	--dark-green: #86efac;
+
+	--soft-blue: rgba(59, 130, 246, 0.16);
+	--blue: #3b82f6;
+	--dark-blue: #93c5fd;
+
+	--soft-yellow: rgba(234, 179, 8, 0.16);
+	--yellow: #facc15;
+
+	--soft-red: rgba(239, 68, 68, 0.16);
+	--red: #ef4444;
+	--dark-red: #fca5a5;
+
+	--soft-purple: rgba(168, 85, 247, 0.16);
+	--purple: #a855f7;
+	--dark-purple: #d8b4fe;
+
+	/* Facultades ECI */
+	--civil: #e0475b;
+	--electrica: #a855f7;
+	--sistemas: #22c55e;
+	--industrial: #f97316;
+	--electronica: #38bdf8;
+	--economia: #06b6d4;
+	--empresas: #ec4899;
+	--matematicas: #3b82f6;
+	--mecanica: #fbbf24;
+	--biomedica: #2dd4bf;
+	--ambiental: #84cc16;
+	--estadistica: #10b981;
+	--doctorados: #38bdf8;
+	--proyectos: #f43f5e;
+	--osiris: #60a5fa;
 }
 
 @theme inline {
-  --color-primary: var(--accent);
-  --color-primary-foreground: var(--accent-foreground);
+	--color-primary: var(--primary);
+	--color-primary-hover: var(--primary-hover);
+	--color-primary-active: var(--primary-active);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary-soft: var(--primary-soft);
+	--color-primary-soft-foreground: var(--primary-soft-foreground);
+	--color-primary-border: var(--primary-border);
+	--color-primary-glow: var(--primary-glow);
 
-  --color-transparent: var(--transparent);
-  --color-blurred-white: var(--blurred-white);
-  --color-default-white: var(--default-white);
-  --color-soft-white: var(--soft-white);
-  --color-off-white: var(--off-white);
-  --color-custom-black: var(--custom-black);
-  --color-soft-gray: var(--soft-gray);
-  --color-gray: var(--gray);
-  --color-dark-gray: var(--dark-gray);
-  --color-soft-green: var(--soft-green);
-  --color-green: var(--green);
-  --color-dark-green: var(--dark-green);
-  --color-soft-blue: var(--soft-blue);
-  --color-blue: var(--blue);
-  --color-dark-blue: var(--dark-blue);
-  --color-yellow: var(--yellow);
-  --color-soft-red: var(--soft-red);
-  --color-red: var(--red);
-  --color-dark-red: var(--dark-red);
-  --color-soft-purple: var(--soft-purple);
-  --color-purple: var(--purple);
-  --color-dark-purple: var(--dark-purple);
-  --color-civil: var(--civil);
-  --color-electrica: var(--electrica);
-  --color-sistemas: var(--sistemas);
-  --color-industrial: var(--industrial);
-  --color-electronica: var(--electronica);
-  --color-economia: var(--economia);
-  --color-empresas: var(--empresas);
-  --color-matematicas: var(--matematicas);
-  --color-mecanica: var(--mecanica);
-  --color-biomedica: var(--biomedica);
-  --color-ambiental: var(--ambiental);
-  --color-estadistica: var(--estadistica);
-  --color-doctorados: var(--doctorados);
-  --color-proyectos: var(--proyectos);
-  --color-osiris: var(--osiris);
+	--color-accent: var(--accent);
+	--color-accent-hover: var(--accent-hover);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent-soft: var(--accent-soft);
+
+	--color-background: var(--background);
+	--color-background-secondary: var(--background-secondary);
+	--color-background-tertiary: var(--background-tertiary);
+
+	--color-surface: var(--surface);
+	--color-surface-hover: var(--surface-hover);
+	--color-surface-secondary: var(--surface-secondary);
+	--color-surface-tertiary: var(--surface-tertiary);
+	--color-surface-muted: var(--surface-muted);
+
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-card-border: var(--card-border);
+
+	--color-overlay: var(--overlay);
+	--color-overlay-foreground: var(--overlay-foreground);
+
+	--color-foreground: var(--foreground);
+	--color-foreground-muted: var(--foreground-muted);
+	--color-foreground-soft: var(--foreground-soft);
+
+	--color-border: var(--border);
+	--color-border-soft: var(--border-soft);
+	--color-border-subtle: var(--border-subtle);
+	--color-separator: var(--separator);
+
+	--color-field-background: var(--field-background);
+	--color-field-foreground: var(--field-foreground);
+	--color-field-placeholder: var(--field-placeholder);
+	--color-field-border: var(--field-border);
+
+	--color-default: var(--default);
+	--color-default-foreground: var(--default-foreground);
+
+	--color-transparent: var(--transparent);
+	--color-blurred-white: var(--blurred-white);
+	--color-default-white: var(--default-white);
+	--color-soft-white: var(--soft-white);
+	--color-off-white: var(--off-white);
+	--color-custom-black: var(--custom-black);
+	--color-soft-gray: var(--soft-gray);
+	--color-gray: var(--gray);
+	--color-dark-gray: var(--dark-gray);
+
+	--color-soft-green: var(--soft-green);
+	--color-green: var(--green);
+	--color-dark-green: var(--dark-green);
+	--color-soft-blue: var(--soft-blue);
+	--color-blue: var(--blue);
+	--color-dark-blue: var(--dark-blue);
+	--color-soft-yellow: var(--soft-yellow);
+	--color-yellow: var(--yellow);
+	--color-soft-red: var(--soft-red);
+	--color-red: var(--red);
+	--color-dark-red: var(--dark-red);
+	--color-soft-purple: var(--soft-purple);
+	--color-purple: var(--purple);
+	--color-dark-purple: var(--dark-purple);
+
+	--color-civil: var(--civil);
+	--color-electrica: var(--electrica);
+	--color-sistemas: var(--sistemas);
+	--color-industrial: var(--industrial);
+	--color-electronica: var(--electronica);
+	--color-economia: var(--economia);
+	--color-empresas: var(--empresas);
+	--color-matematicas: var(--matematicas);
+	--color-mecanica: var(--mecanica);
+	--color-biomedica: var(--biomedica);
+	--color-ambiental: var(--ambiental);
+	--color-estadistica: var(--estadistica);
+	--color-doctorados: var(--doctorados);
+	--color-proyectos: var(--proyectos);
+	--color-osiris: var(--osiris);
+}
+
+/* Background Pattern Utilities */
+@utility bg-grid-pattern {
+	background-size: 36px 36px;
+	background-image:
+		linear-gradient(to right, var(--pattern-stroke) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--pattern-stroke) 1px, transparent 1px);
+}
+
+@utility bg-dots-pattern {
+	background-size: 24px 24px;
+	background-image: radial-gradient(var(--pattern-stroke) 1px, transparent 1px);
+}
+
+@utility bg-grid-primary {
+	background-size: 36px 36px;
+	background-image:
+		linear-gradient(to right, var(--pattern-primary) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--pattern-primary) 1px, transparent 1px);
+}
+
+@utility glass-card {
+	background: var(--card);
+	border: 1px solid var(--card-border);
+	box-shadow:
+		0 1px 3px 0 rgba(0, 0, 0, 0.04),
+		0 1px 2px -1px rgba(0, 0, 0, 0.04);
+}
+
+@utility glass-panel {
+	background: color-mix(in srgb, var(--surface) 90%, transparent);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid var(--border);
 }
 
 @keyframes iconFlip {
-  from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+	from {
+		transform: rotate(180deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
 }
 
 @keyframes enterAnimate {
-  from {
-    opacity: 0;
-    translate: 0 10px;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
+	from {
+		opacity: 0;
+		translate: 0 10px;
+	}
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
 }
 
 @keyframes shakeAnimateButton {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-5px);
+	}
+	50% {
+		transform: translateX(5px);
+	}
+	75% {
+		transform: translateX(-5px);
+	}
+	100% {
+		transform: translateX(0);
+	}
 }
 
 @keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateX(60px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 @keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateX(-60px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 @utility animate-slide-right {
-  animation: slide-in-right 0.3s ease-out forwards;
+	animation: slide-in-right 0.3s ease-out forwards;
 }
 
 @utility animate-slide-left {
-  animation: slide-in-left 0.3s ease-out forwards;
+	animation: slide-in-left 0.3s ease-out forwards;
 }

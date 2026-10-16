@@ -3,6 +3,15 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import fetchFn from "@/src/libs/fetchFn";
 
+/**
+ * Configuración de NextAuth — plantilla base.
+ *
+ * Incluye dos providers de ejemplo: Azure AD y Credentials.
+ * Las páginas de signIn/signOut NO están definidas aquí; si un proyecto
+ * las necesita, agrega la propiedad `pages` y crea las rutas correspondientes.
+ *
+ * TODO: Ajusta los providers, callbacks y opciones de sesión según el proyecto.
+ */
 export const authOptions: AuthOptions = {
 	providers: [
 		AzureADProvider({
@@ -27,6 +36,7 @@ export const authOptions: AuthOptions = {
 				rol: { label: "rol", type: "text" },
 			},
 			async authorize(credentials, account) {
+				// TODO: cambiar endpoint y propiedades según el proyecto
 				const response = await fetchFn(`/endpoint/login`, {
 					method: "POST",
 					body: {
@@ -44,7 +54,11 @@ export const authOptions: AuthOptions = {
 				} else if (response.code !== 200) {
 					throw new Error("server");
 				}
-				return { ...response.data, email: response.data.correo_principal, account };
+				return {
+					...response.data,
+					email: response.data.correo_principal,
+					account,
+				};
 			},
 		}),
 	],
@@ -68,9 +82,9 @@ export const authOptions: AuthOptions = {
 		},
 	},
 
-	pages: {
-		signIn: "/login",
-		signOut: "/logout",
-		error: "/login", // Error code passed in query string as ?error=
-	},
+	// pages: {
+	// 	signIn: "/login",   // TODO: crear app/login/page.tsx si se habilita
+	// 	signOut: "/logout", // TODO: crear app/logout/page.tsx si se habilita
+	// 	error: "/login",
+	// },
 };

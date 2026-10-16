@@ -1,42 +1,28 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
 
-export async function middleware(request: NextRequest) {
-	const { pathname } = request.nextUrl;
+/**
+ * Middleware de plantilla — sin protección de rutas activa.
+ *
+ * NextAuth está configurado como infraestructura (providers, callbacks, etc.)
+ * pero no fuerza autenticación en ninguna ruta por defecto.
+ *
+ * TODO: Para proteger rutas en un proyecto concreto, descomenta el bloque
+ * de abajo y ajusta los paths que deben requerir sesión.
+ */
+export function middleware(request: NextRequest) {
+	// const { pathname } = request.nextUrl;
 
-	// Allow public and static assets (also handled by matcher)
-	if (
-		pathname.startsWith("/_next") ||
-		pathname.includes("/api/") ||
-		pathname.includes("/assistance") ||
-		pathname.includes("/images/") ||
-		pathname.includes("/api/auth/session") ||
-		pathname === "/favicon.ico"
-	) {
-		return NextResponse.next();
-	}
-
-	// Check session token from NextAuth
-	const token = await getToken({
-		req: request as any,
-		secret: process.env.NEXTAUTH_SECRET,
-	});
-
-	// If no token and not already on auth pages, redirect to login
-	if (
-		!token &&
-		!pathname.startsWith("/login") &&
-		!pathname.startsWith("/logout")
-	) {
-		const loginUrl = new URL("/login", request.url);
-		loginUrl.searchParams.set("callbackUrl", request.url);
-		return NextResponse.redirect(loginUrl);
-	}
+	// Ejemplo: proteger solo rutas bajo /dashboard
+	// const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+	// if (!token && pathname.startsWith("/dashboard")) {
+	// 	return NextResponse.redirect(new URL("/login", request.url));
+	// }
 
 	return NextResponse.next();
 }
 
 export const config = {
+	// Excluye archivos estáticos y rutas internas de Next.js
 	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
