@@ -22,4 +22,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/public ./public
 
-CMD ["npm", "start"]
+# No ejecutar como root: el usuario "node" ya existe en la imagen base
+USER node
+
+# Se invoca next directamente (equivale a "npm start") para que npm no necesite escribir en disco
+CMD ["node_modules/.bin/next", "start", "-p", "3000"]

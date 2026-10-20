@@ -9,3 +9,11 @@ services:
       - "${PORT}:3000"
     environment:
       - TZ=America/Bogota
+    # Endurecimiento del contenedor
+    user: "node"
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
