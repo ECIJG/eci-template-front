@@ -1,14 +1,15 @@
 "use client";
 
 import { Button, Card, CardHeader, Chip, Disclosure } from "@heroui/react";
-import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "../libs/utils";
 import { containers } from "./staticData";
 import { CategoryParam, containerType, itemType, sectionType } from "./type";
 import ComponentsModal from "./ComponentsModal";
 import type { ModalRef } from "../components/ui/Modal";
 import Icon from "../components/ui/Icon";
+import Playground from "./Playground";
 
 const packageJson = {
 	dependencies: {
@@ -82,6 +83,9 @@ const COLOR_THEMES: Record<
 
 const Main = () => {
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+	const [showPlayground, setShowPlayground] = useState<boolean>(false);
+
 	const [selectedCategory, setSelectedCategory] =
 		useState<CategoryParam>("components");
 	const modalRef = useRef<ModalRef>(null);
@@ -93,8 +97,35 @@ const Main = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (showPlayground) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "auto";
+		}
+	}, [showPlayground]);
+
+	// Mostrar Playground con F2
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "F2") {
+				setShowPlayground((prev) => !prev);
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, []);
+
 	return (
 		<>
+			{/* PlayGround */}
+			<AnimatePresence mode="wait">
+				{showPlayground && <Playground />}
+			</AnimatePresence>
 			<ComponentsModal
 				modalRef={modalRef}
 				category={selectedCategory}

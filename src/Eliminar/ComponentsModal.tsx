@@ -5,6 +5,7 @@ import { Button, Tabs, Chip } from "@heroui/react";
 import { useTheme } from "next-themes";
 import Modal, { ModalRef } from "@/src/components/ui/Modal";
 import Icon from "@/src/components/ui/Icon";
+import AnimateText from "@/src/components/ui/AnimateText";
 import { SimpleLoading } from "@/src/components/ui/SimpleLoading";
 import ImageLogo from "@/src/components/ui/ImageLogo";
 import ImageLogoCut from "@/src/components/ui/ImageCutLogo";
@@ -471,6 +472,236 @@ function IconPlayground() {
 	);
 }
 
+
+function AnimateTextPlayground() {
+	const [text, setText] = useState("Escuela Colombiana de Ingeniería");
+	const [mode, setMode] = useState<"word" | "letter">("word");
+	const [type, setType] = useState<"slide" | "fade">("slide");
+	const [velocity, setVelocity] = useState<number>(2);
+	const [hasDescription, setHasDescription] = useState(true);
+	const [descText, setDescText] = useState("Julio Garavito - Innovación y Excelencia");
+	const [descDelay, setDescDelay] = useState<number>(0.8);
+	const [replayKey, setReplayKey] = useState(0);
+
+	const replay = () => setReplayKey((k) => k + 1);
+
+	return (
+		<div className="flex flex-col gap-4">
+			{/* Panel de Controles Interactivos */}
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3.5 bg-surface-secondary/70 rounded-xl border border-border">
+				{/* 1. Prop 'text' */}
+				<div className="flex flex-col gap-1 md:col-span-2">
+					<div className="flex items-center justify-between">
+						<label className="text-[11px] font-semibold text-foreground/80">
+							Prop <span className="font-mono text-primary font-bold">text</span> (requerido):
+						</label>
+						<span className="text-[10px] text-foreground-muted">
+							Texto principal que será fragmentado y animado
+						</span>
+					</div>
+					<div className="flex gap-2">
+						<input
+							type="text"
+							value={text}
+							onChange={(e) => setText(e.target.value)}
+							placeholder="Escribe el texto a animar..."
+							className="w-full text-xs px-3 py-1.5 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-primary transition-colors"
+						/>
+						<Button
+							size="sm"
+							variant="primary"
+							onPress={replay}
+							className="whitespace-nowrap px-3 text-xs shrink-0 flex items-center gap-1.5"
+						>
+							<Icon icon="arrow-clockwise" className="text-xs" />
+							<span>Reanimar</span>
+						</Button>
+					</div>
+				</div>
+
+				{/* 2. Prop 'animate.mode' */}
+				<div className="flex flex-col gap-1">
+					<label className="text-[11px] font-semibold text-foreground/80">
+						Prop <span className="font-mono text-primary font-bold">animate.mode</span> (Segmentación):
+					</label>
+					<div className="flex gap-1.5">
+						{(["word", "letter"] as const).map((m) => (
+							<button
+								key={m}
+								onClick={() => {
+									setMode(m);
+									if (m === "letter" && velocity < 10) setVelocity(20);
+									if (m === "word" && velocity > 10) setVelocity(2);
+									replay();
+								}}
+								className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+									mode === m
+										? "bg-primary text-primary-foreground border-primary shadow-xs"
+										: "bg-card border-border text-foreground-muted hover:bg-surface-hover hover:text-foreground"
+								}`}
+							>
+								{m === "word" ? "Palabra ('word')" : "Letra ('letter')"}
+							</button>
+						))}
+					</div>
+					<span className="text-[10px] text-foreground-muted mt-0.5">
+						{mode === "word"
+							? "Divide por palabras (text.split(' ')) manteniendo espacios legibles."
+							: "Divide por carácter (text.split('')) estilo mecanografía o texto fluido."}
+					</span>
+				</div>
+
+				{/* 3. Prop 'animate.type' */}
+				<div className="flex flex-col gap-1">
+					<label className="text-[11px] font-semibold text-foreground/80">
+						Prop <span className="font-mono text-primary font-bold">animate.type</span> (Efecto):
+					</label>
+					<div className="flex gap-1.5">
+						{(["slide", "fade"] as const).map((t) => (
+							<button
+								key={t}
+								onClick={() => {
+									setType(t);
+									replay();
+								}}
+								className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+									type === t
+										? "bg-primary text-primary-foreground border-primary shadow-xs"
+										: "bg-card border-border text-foreground-muted hover:bg-surface-hover hover:text-foreground"
+								}`}
+							>
+								{t === "slide" ? "Desplazamiento ('slide')" : "Desvanecimiento ('fade')"}
+							</button>
+						))}
+					</div>
+					<span className="text-[10px] text-foreground-muted mt-0.5">
+						{type === "slide"
+							? "Inicia desde y: 30 con desenfoque blur(10px) hacia y: 0."
+							: "Inicia en su posición con blur(10px) y opacidad progresiva pura."}
+					</span>
+				</div>
+
+				{/* 4. Prop 'animate.velocity' */}
+				<div className="flex flex-col gap-1">
+					<div className="flex items-center justify-between">
+						<label className="text-[11px] font-semibold text-foreground/80">
+							Prop <span className="font-mono text-primary font-bold">animate.velocity</span>:
+						</label>
+						<span className="font-mono text-xs text-primary font-bold">
+							{velocity}
+						</span>
+					</div>
+					<div className="flex items-center gap-2">
+						<input
+							type="range"
+							min="0.2"
+							max={mode === "letter" ? "40" : "10"}
+							step="0.5"
+							value={velocity}
+							onChange={(e) => {
+								setVelocity(Number(e.target.value));
+								replay();
+							}}
+							className="w-full accent-primary cursor-pointer"
+						/>
+						<span className="text-[10px] text-foreground-muted whitespace-nowrap">
+							{velocity >= 10 ? "Cadencia Rápida" : "Cadencia Pausada"}
+						</span>
+					</div>
+					<span className="text-[10px] text-foreground-muted mt-0.5">
+						Controla el retardo escalonado de Framer Motion (stagger y delay: i / velocity).
+					</span>
+				</div>
+
+				{/* 5. Prop 'description' */}
+				<div className="flex flex-col gap-1">
+					<div className="flex items-center justify-between">
+						<label className="text-[11px] font-semibold text-foreground/80 cursor-pointer flex items-center gap-1.5">
+							<input
+								type="checkbox"
+								checked={hasDescription}
+								onChange={(e) => {
+									setHasDescription(e.target.checked);
+									replay();
+								}}
+								className="accent-primary rounded cursor-pointer"
+							/>
+							<span>Prop <span className="font-mono text-primary font-bold">description</span></span>
+						</label>
+						{hasDescription && (
+							<span className="text-[10px] text-foreground-muted font-mono">
+								delay: {descDelay}s
+							</span>
+						)}
+					</div>
+					{hasDescription && (
+						<div className="flex gap-2">
+							<input
+								type="text"
+								value={descText}
+								onChange={(e) => setDescText(e.target.value)}
+								placeholder="Subtítulo o texto secundario..."
+								className="w-full text-xs px-2.5 py-1 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-primary"
+							/>
+							<input
+								type="number"
+								min="0.1"
+								max="5"
+								step="0.1"
+								value={descDelay}
+								onChange={(e) => {
+									setDescDelay(Number(e.target.value));
+									replay();
+								}}
+								className="w-16 text-xs px-2 py-1 rounded-lg border border-border bg-card text-foreground font-mono text-center"
+								title="delay en segundos"
+							/>
+						</div>
+					)}
+					<span className="text-[10px] text-foreground-muted mt-0.5">
+						{hasDescription
+							? "Renderiza un párrafo secundario animado con fade in tras el retardo indicado."
+							: "Subtítulo secundario desactivado."}
+					</span>
+				</div>
+			</div>
+
+			{/* Vista Previa en Vivo */}
+			<div className="flex flex-col gap-2">
+				<div className="flex items-center justify-between">
+					<span className="text-[11px] font-semibold text-foreground-muted uppercase tracking-wider">
+						Vista previa interactiva:
+					</span>
+					<span className="text-[10px] text-foreground-muted font-mono">
+						animate.mode="{mode}" | animate.type="{type}" | velocity={velocity}
+					</span>
+				</div>
+				<div className="p-6 md:p-8 rounded-2xl bg-surface-secondary/70 border border-border min-h-[120px] flex flex-col justify-center items-center text-center overflow-hidden">
+					<AnimateText
+						key={`${replayKey}-${mode}-${type}-${velocity}-${hasDescription}-${descDelay}`}
+						text={text}
+						className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight"
+						animate={{
+							mode,
+							type,
+							velocity,
+						}}
+						description={
+							hasDescription && descText
+								? {
+										text: descText,
+										className: "text-xs md:text-sm text-foreground-muted mt-2",
+										delay: descDelay,
+								  }
+								: undefined
+						}
+					/>
+				</div>
+			</div>
+		</div>
+	);
+}
+
 function SimpleLoadingPlayground() {
 	const [active, setActive] = useState(true);
 
@@ -897,6 +1128,7 @@ const ComponentsSection = () => {
 	const items = [
 		{ id: "modal", label: "Modal.tsx" },
 		{ id: "icon", label: "Icon.tsx" },
+		{ id: "animatetext", label: "AnimateText.tsx" },
 		{ id: "simpleloading", label: "SimpleLoading.tsx" },
 		{ id: "switchtheme", label: "SwitchTheme.tsx" },
 		{ id: "imagelogo", label: "ImageLogo.tsx" },
@@ -1069,7 +1301,118 @@ export default function EjemploModal() {
 				/>
 			)}
 
-			{/* 3. SimpleLoading */}
+			{/* 3. AnimateText */}
+			{(filter === "all" || filter === "animatetext") && (
+				<ComponentItemCard
+					id="animatetext"
+					title="AnimateText.tsx (Texto con Animación Escalonada)"
+					file="src/components/ui/AnimateText.tsx"
+					badge="UI Animation"
+					badgeColor="accent"
+					description="Componente de texto dinámico basado en Framer Motion. Divide el texto en letras o palabras animadas con efectos combinados de desenfoque progresivo (blur), opacidad y desplazamiento vertical (slide), con soporte para subtítulo o descripción secundaria sincronizada."
+					propsTable={[
+						{
+							name: "text",
+							type: "string",
+							required: true,
+							description:
+								"Texto principal que se fragmenta y anima secuencialmente según el modo seleccionado (por letra o por palabra).",
+						},
+						{
+							name: "className",
+							type: "string",
+							description:
+								"Clases de Tailwind/CSS aplicadas al contenedor <motion.p> del texto principal (tamaño, color, peso tipográfico, alineación, tracking, etc.).",
+						},
+						{
+							name: "animate",
+							type: "{ mode: 'letter' | 'word'; type?: 'fade' | 'slide'; velocity?: number }",
+							default: "{ mode: 'word', velocity: 0.5 }",
+							description:
+								"Objeto de configuración de la física y segmentación de la animación del texto.",
+						},
+						{
+							name: "animate.mode",
+							type: "'letter' | 'word'",
+							default: "'word'",
+							description:
+								"Estrategia de fragmentación: 'word' separa por espacios completos manteniendo palabras legibles; 'letter' separa carácter por carácter estilo mecanografía o texto fluido.",
+						},
+						{
+							name: "animate.type",
+							type: "'fade' | 'slide'",
+							default: "'slide'",
+							description:
+								"Efecto visual de aparición: 'slide' entra desde y: 30 con blur(10px) y opacidad gradual; 'fade' entra en su posición original con blur(10px) y opacidad sin desplazamiento.",
+						},
+						{
+							name: "animate.velocity",
+							type: "number",
+							default: "0.5",
+							description:
+								"Cadencia de velocidad. Controla el retardo escalonado de Framer Motion (staggerChildren y delay: i / velocity). Valores mayores aceleran la animación entre fragmentos consecutivos (ej. 2-5 para palabras, 15-30 para letras).",
+						},
+						{
+							name: "description",
+							type: "{ text: string; className?: string; delay?: number }",
+							description:
+								"Configuración opcional para renderizar un párrafo secundario o subtítulo explicativo con animación de fade in.",
+						},
+						{
+							name: "description.text",
+							type: "string",
+							required: true,
+							description:
+								"Cadena de texto para la descripción secundaria.",
+						},
+						{
+							name: "description.className",
+							type: "string",
+							default: "'text-sm text-gray'",
+							description:
+								"Clases Tailwind/CSS adicionales para estilizar el texto descriptivo.",
+						},
+						{
+							name: "description.delay",
+							type: "number",
+							default: "0.5",
+							description:
+								"Tiempo de espera (en segundos) antes de que la descripción inicie su animación de aparición gradual.",
+						},
+					]}
+					playground={<AnimateTextPlayground />}
+					usage={`import AnimateText from "@/src/components/ui/AnimateText";
+
+// Caso 1: Título animado por palabras con desplazamiento suave y subtítulo
+<AnimateText
+  text="Escuela Colombiana de Ingeniería Julio Garavito"
+  className="text-3xl font-extrabold text-foreground tracking-tight"
+  animate={{
+    mode: "word",
+    type: "slide",
+    velocity: 2,
+  }}
+  description={{
+    text: "Innovación, tecnología y formación académica de excelencia.",
+    className: "text-foreground-muted mt-2",
+    delay: 0.8,
+  }}
+/>
+
+// Caso 2: Efecto fluido letra por letra con desenfoque suave (fade)
+<AnimateText
+  text="Plantilla de Desarrollo Frontend ECI"
+  className="text-xl font-bold text-primary font-mono"
+  animate={{
+    mode: "letter",
+    type: "fade",
+    velocity: 25,
+  }}
+/>`}
+				/>
+			)}
+
+			{/* 4. SimpleLoading */}
 			{(filter === "all" || filter === "simpleloading") && (
 				<ComponentItemCard
 					id="simpleloading"

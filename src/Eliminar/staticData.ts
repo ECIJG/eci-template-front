@@ -36,6 +36,12 @@ export const containers: containerType[] = [
 						path: "src/components/ui/Icon.tsx",
 					},
 					{
+						title: "AnimateText.tsx",
+						description:
+							"Texto animado con Framer Motion con segmentación por letras o palabras, efectos slide/fade y descripción secundaria",
+						path: "src/components/ui/AnimateText.tsx",
+					},
+					{
 						title: "SimpleLoading.tsx",
 						description: "Indicador animado de carga con spinner y rebotes",
 						path: "src/components/ui/SimpleLoading.tsx",
