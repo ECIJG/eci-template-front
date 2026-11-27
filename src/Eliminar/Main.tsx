@@ -10,6 +10,8 @@ import ComponentsModal from "./ComponentsModal";
 import type { ModalRef } from "../components/ui/Modal";
 import Icon from "../components/ui/Icon";
 import Playground from "./Playground";
+import EciLogoMotion from "../components/ui/EciLogoMotion";
+import SwitchTheme from "../components/ui/SwitchTheme";
 
 const packageJson = {
 	dependencies: {
@@ -133,6 +135,7 @@ const Main = () => {
 			/>
 
 			<div className="min-h-screen bg-background bg-grid-pattern text-foreground p-4 md:p-8 relative">
+				<EciLogoMotion height={126} className="mb-4 flex mx-auto" />
 				<div className="max-w-6xl mx-auto">
 					{/* Encabezado Principal Moderno con Estilo ECI */}
 					<div className="text-center mb-10 pt-4">
